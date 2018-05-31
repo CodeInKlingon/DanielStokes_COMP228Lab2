@@ -1,12 +1,21 @@
 package ex1;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Test {
 
+
+    //array of responses to correct answer choices
     private String[] correctResponse = {"Excellent", "Good!", "Kepp it up!", "Nice one"};
+
+    //array of responses for incorrect answer choices
     private String[] incorrectResponse = {"No. Please try again", "Wrong. Try once more", "Don't give up!", "No. Keep trying."};
+
+    //array of questions for test object
     private TestQuestion[] questions = new TestQuestion[]{};
 
     private Random rn = new Random();
@@ -18,10 +27,15 @@ public class Test {
         for(int i = 0; i < questions.length; i++){
 
             //ask question
-            String answer = JOptionPane.showInputDialog(null,questions[i].getQuestion());
+            String[] values = {"0", "3", "6", "12", "18", "24"};
+
+            Object selected = JOptionPane.showInputDialog(null, questions[i].getQuestion(), "Selection", JOptionPane.DEFAULT_OPTION, null, shuffleOptions(questions[i].getOptions()), "0");
+            //null if the user cancels.
+                String selectedString = selected.toString();
+                //do something
 
             //check answer
-            if(questions[i].checkAnswer(answer)){
+            if(questions[i].checkAnswer(selectedString)){
                 JOptionPane.showMessageDialog(null, correctResponse[rn.nextInt(correctResponse.length-1)]);
                 grade++;
             }else{
@@ -49,17 +63,34 @@ public class Test {
         questions[questions.length-1] = newQuestion;
     }
 
+
+    static String[] shuffleOptions(String[] options){
+        List<String> shuffledOptions = new ArrayList<>();
+        for (int i = 0; i < options.length; i++) {
+            shuffledOptions.add(options[i]);
+        }
+        Collections.shuffle(shuffledOptions);
+        return shuffledOptions.toArray(new String[0]);
+    }
+
 }
 
 
 class TestQuestion{
 
     private String question;
+
+    public String[] getOptions() {
+        return options;
+    }
+
+    private String[] options;
     private String answer;
 
-    public TestQuestion(String question, String answer){
+    public TestQuestion(String question, String[] answers){
         this.question = question;
-        this.answer = answer;
+        this.options = answers;
+        this.answer = answers[0];
     }
 
     public String getQuestion() {
