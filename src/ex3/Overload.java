@@ -2,10 +2,12 @@ package ex3;
 
 public class Overload {
 
+    //max between two values
     public static double ReturnMax(double num1, double num2){
         return Double.max(num1,num2);
     }
 
+    //max in one array
     public static double ReturnMax(double[] numbers){
         double max = numbers[0];
         for(int i = 1; i < numbers.length; i++){
@@ -17,6 +19,7 @@ public class Overload {
         return max;
     }
 
+    //max of two arrays
     public static double ReturnMax(double[] numbers1, double[] numbers2){
         double max = numbers1[0];
         for(int i = 1; i < numbers1.length; i++){

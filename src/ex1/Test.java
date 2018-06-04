@@ -52,6 +52,7 @@ public class Test {
         questions = testQuestions;
     }
 
+    //add new question to array
     public void AddQuestion(TestQuestion newQuestion){
         int questionCount = questions.length;
         TestQuestion[] oldQuestions = questions;
@@ -63,7 +64,7 @@ public class Test {
         questions[questions.length-1] = newQuestion;
     }
 
-
+    //static method to shuffle all the questions and return them in a random order
     static String[] shuffleOptions(String[] options){
         List<String> shuffledOptions = new ArrayList<>();
         for (int i = 0; i < options.length; i++) {
@@ -75,7 +76,7 @@ public class Test {
 
 }
 
-
+//question object
 class TestQuestion{
 
     private String question;
@@ -109,6 +110,7 @@ class TestQuestion{
         this.answer = answer;
     }
 
+    //bool to check if string is answer
     public boolean checkAnswer(String response){
         return answer.toLowerCase().equals(response.toLowerCase());
     }
